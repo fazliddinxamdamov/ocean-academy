@@ -1,36 +1,82 @@
-{% extends 'base.html' %}
+{#{% extends 'base.html' %}#}
 {% load static %}
+<!DOCTYPE html>
 
-{% block title %}Log-In{% endblock %}
+<html lang="en">
 
-{% block page_title %}
-    Log-In
-{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Ocean Academy | Kirish{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+    {% block style %}
+    {% endblock %}
+</head>
+
+{# navbar #}
+<ul class="nav container  d-flex flex-md-row flex-column  justify-content-between align-items-center">
+    <li class="navbar-brand ">
+        <a class="nav-link" href="/">
+            <div class="my-nav-link">
+                <img src="{% static 'imgs/wave 2.png' %}" alt="site-logo" width="65px" style="padding-left: 20px">
+                <p style="margin-bottom: 0">OCEAN ACADEMY</p>
+            </div>
+        </a>
+    </li>
+
+    <li class="nav-item display-3">
+        {#                                     {% block page_title %}{% endblock %}#}
+    </li>
+
+    <li><a href="{% url 'course_list' %}">Kurslarimiz</a></li>
+
+    <li class="nav-item">
+        {% if request.user.is_authenticated %}
+            <a class="nav-link btn btn-danger btn-sm" href="{% url 'logout' %}">Sign Out</a>
+        {% else %}
+            <a class="nav-link btn btn-success btn-sm" href="{% url 'login' %}">Sign In</a>
+        {% endif %}
+    </li>
+</ul>
+{#------------------------------------#}
 
 {% block content %}
-    <div class="module shadow-style w-100 text-center">
-        {% if form.errors %}
-            <p class="text-capitalize hover-style">your username or password is wrong please try again.</p>
-        {% else %}
-            <p class="hover-style">Please Sign In with the following form:</p>
-        {% endif %}
+    <div class="container">
+        <div class="registration-page">
 
-        <div class="form">
-            <form class="form d-inline-block" action="{% url 'login' %}" method="post">
-                {{ form.as_p }}
+            {#            {% if form.errors %}#}
+            {#                <p>your username or password is wrong please try again.</p>#}
+            {#            {% else %}#}
+            {#            <p class="hover-style">Please Sign In with the following form:</p>#}
+            {#            {% endif %}#}
 
-                {% csrf_token %}
+            <div class="module module-content">
 
-                <input type="hidden" name="next" value="{{ next }}">
+                <h3 class="register-now">Tizimga kirish</h3>
+                <form class="form" action="{% url 'login' %}" method="post">
+                    {{ form | capfirst }}
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
+                    <input class="submit-button bg-primary" type="submit" value="Log-In">
+                </form>
 
-                <div class="hover-style">
-                    <a href="{% url 'student_registration' %}">
-                        Create new account ?
-                    </a>
+                <div class="are-you-new-credential">
+                    <p>Yangi foydalanuvchimisiz?</p>
+                    <p><a href="{% url 'student_registration' %}">Create new account</a></p>
                 </div>
 
-                <p ><input class="bg-primary submit" type="submit" value="Log-In"></p>
-            </form>
+            </div>
+            <div class="image-div">
+                <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?size=338&ext=jpg&ga=GA1.2.960157126.1654786384"
+                     alt="reasm topilmadi">
+            </div>
         </div>
+
+
     </div>
+
 {% endblock %}

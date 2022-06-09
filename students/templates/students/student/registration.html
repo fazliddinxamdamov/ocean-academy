@@ -1,19 +1,66 @@
-{% extends 'base.html' %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
 
-{% block title %}Sign Up{% endblock %}
+    <link rel="stylesheet" href="{% static '/base.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
 
-{% block page_title %}
-    Sign Up
-{% endblock %}
+    {# if you needed to add additional style files #}
+    {% block style %}
+    {% endblock %}
+</head>
+
+{# navbar #}
+<ul class="nav container  d-flex flex-md-row flex-column  justify-content-between align-items-center">
+    <li class="navbar-brand ">
+        <a class="nav-link" href="/">
+            <div class="my-nav-link">
+                <img src="{% static 'imgs/wave 2.png' %}" alt="site-logo" width="65px" style="padding-left: 20px">
+                <p style="margin-bottom: 0">OCEAN ACADEMY</p>
+            </div>
+        </a>
+    </li>
+
+    <li class="nav-item display-3">
+        {#                                     {% block page_title %}{% endblock %}#}
+    </li>
+
+    <li><a href="{% url 'course_list' %}">Kurslarimiz</a></li>
+
+    <li class="nav-item">
+        {% if request.user.is_authenticated %}
+            <a class="nav-link btn btn-danger btn-sm" href="{% url 'logout' %}">Sign Out</a>
+        {% else %}
+            <a class="nav-link btn btn-success btn-sm" href="{% url 'login' %}">Sign In</a>
+        {% endif %}
+    </li>
+</ul>
+{#------------------------------------#}
+
 
 {% block content %}
-    <div class="module shadow-style w-100">
-        <h2 class="card p-4 text-center text-white bg-primary">Enter you details to create a student account</h2>
-        <form class="form" method="post">
-            {{ form.as_p }}
-            {% csrf_token %}
-            <p><input class="bg-primary" type="submit" value="Create the account"></p>
-        </form>
+    <div class="container">
+
+        <div class="registration-page">
+            <div class="module module-content">
+                <h3 class="register-now">Ro'yhatdan o'tish</h3>
+                <form class="form" method="post">
+                    {{ form | capfirst }}
+                    {% csrf_token %}
+                    <input class="submit-button bg-primary" type="submit" value="Create the account">
+                </form>
+            </div>
+
+            <div class="image-div">
+                <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?size=338&ext=jpg&ga=GA1.2.960157126.1654786384" alt="reasm topilmadi">
+            </div>
+        </div>
+
     </div>
+
 {% endblock %}
