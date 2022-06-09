@@ -18,24 +18,24 @@
 
 {% block content %}
 
-{#    <div class="contents hover-style">#}
-{#        <h3 class="my_button">Subjects</h3>#}
-{#        <ul id="course-modules">#}
-{#            <li {% if not subject %}class="selected" {% endif %}>#}
-{#                <a href="{% url 'course_list' %}">All</a>#}
-{#            </li>#}
-{##}
-{#            {% for s in subjects %}#}
-{#                <li {% if subject == s %}class="selected" {% endif %}>#}
-{#                    <a href="{% url 'course_list_subject' s.slug %}">#}
-{#                        {{ s.title }}#}
-{#                        <br>#}
-{#                        <span>{{ s.total_courses }}</span>#}
-{#                    </a>#}
-{#                </li>#}
-{#            {% endfor %}#}
-{#        </ul>#}
-{#    </div>#}
+    <div class="contents hover-style">
+        <h3 class="my_button">Subjects</h3>
+        <ul id="course-modules">
+            <li {% if not subject %}class="selected" {% endif %}>
+                <a href="{% url 'course_list' %}">All</a>
+            </li>
+
+            {% for s in subjects %}
+                <li {% if subject == s %}class="selected" {% endif %}>
+                    <a href="{% url 'course_list_subject' s.slug %}">
+                        {{ s.title }}
+                        <br>
+                        <span>{{ s.total_courses }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 
     <div class="module shadow-style" >
         {% for course in courses %}

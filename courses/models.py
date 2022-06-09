@@ -55,6 +55,7 @@ class Subject(models.Model):
 
 class Course(models.Model):
     owner = models.ForeignKey(User, related_name="courses_created", on_delete=models.CASCADE)
+    image_url = models.CharField(max_length=100000)
     subject = models.ForeignKey(Subject, related_name="courses", on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     overview = models.TextField()

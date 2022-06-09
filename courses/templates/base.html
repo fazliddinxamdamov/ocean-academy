@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}E-learning{% endblock %}</title>
+    <title>Ocean Academy | Home</title>
+    {#    <title>{% block title %}Ocaen Academy | Home{% endblock %}</title>#}
 
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
@@ -56,10 +57,28 @@
         </div>
     </div>
 
-    <div class="course-info">
+    <h1 class="w-25 m-auto">Barcha kurslar</h1>
+    <h1 class="w-25 m-auto">Barcha kurslar</h1>
+    <h1 class="w-25 m-auto">Barcha kurslar</h1>
 
-                                            {#todo bu joyga courselarni joylashtirish kerak#}
+    <div class="courses">
+        {% for course in courses %}
+            {% with subject=course.subject %}
+                <div class="course">
+                    <div class="course-image">
+                        <img src="{{ course.image_url }}" alt="Rasm topilmadi :("> <br>
+                    </div>
+                    <div></div>
+                    <a href="{% url 'course_detail' course.slug %}">{{ course.title }}</a>
+                    {#                    <p><a href="{% url 'course_list_subject' subject.slug %}">{{ subject }}</a></p>#}
+                    <p>{{ course.owner }}</p>
+                    <div>
 
+                    </div>
+                </div>
+
+            {% endwith %}
+        {% endfor %}
     </div>
 
 </div>
