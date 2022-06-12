@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@800&family=Oswald:wght@700&display=swap');
+
+
+.nav {
+    padding: 5px 20px;
+}
+
+.nav-link {
+    /*margin: 0;*/
+    /*padding: 0;*/
+}
+.kurslarimiz-link-in-navbar{
+    color: black;
+}
+.kurslarimiz-link-in-navbar:hover{
+
+}
+
+.my-nav-link {
+    display: flex;
+}
+
+.my-nav-link p {
+    font-family: Kanit, sans-serif;
+    /*margin-bottom: -5px;*/
+    margin: 8px 0 0 7px;
+    /*color: black;*/
+    color: #0056d5;
+}
+
+.course_detail_wrapper{
+    width: 100%;
+    /*height: 500px;*/
+    /*border: 1px solid red;*/
+    /*padding: 30px 50px 30px 50px;*/
+}
+.detail_image{
+    width: 80%;
+    /*border: 1px solid blue;*/
+    margin: 0 auto;
+}
+.detail_image img{
+    width: 100%;
+    height: 100%;
+}
+.detail_title{
+    text-align: center;
+    align-items: center;
+    font-weight: bold;
+    font-family: Kanit, sans-serif;
+    font-size: 40px;
+}

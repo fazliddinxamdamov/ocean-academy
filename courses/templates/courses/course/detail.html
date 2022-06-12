@@ -1,57 +1,104 @@
-{% extends 'base.html' %}
+{#{% extends 'base.html' %}#}
 {% load static %}
-{% block title %}{{ object.title }}{% endblock %}
 
+<!DOCTYPE html>
+<html lang="en">
 
-{% block page_title %}
-            {{ object.title }}
-{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ocean Academy | Kurslarimiz</title>
+    {#    <title>{% block title %}Ocaen Academy | Home{% endblock %}</title>#}
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'detail.css' %}">
+
+    {# if you needed to add additional style files #}
+    {#    {% block style %}#}
+    {#    {% endblock %}#}
+</head>
+<body>
+
+{# navbar #}
+<ul class="nav container  d-flex flex-md-row flex-column  justify-content-between align-items-center">
+    <li class="navbar-brand ">
+        <a class="nav-link" href="/">
+            <div class="my-nav-link">
+                <img src="{% static 'imgs/wave 2.png' %}" alt="site-logo" width="65px" style="padding-left: 20px">
+                <p style="margin-bottom: 0">OCEAN ACADEMY</p>
+            </div>
+        </a>
+    </li>
+
+    <li class="nav-item display-3">
+        {#                                     {% block page_title %}{% endblock %}#}
+    </li>
+
+    {#    <li><a class="kurslarimiz-link-in-navbar" href="">Kurslarimiz</a></li>#}
+
+    <li class="nav-item">
+        {% if request.user.is_authenticated %}
+            <a class="nav-link btn btn-danger btn-sm" href="{% url 'logout' %}">Sign Out</a>
+        {% else %}
+            <a class="nav-link btn btn-success btn-sm" href="{% url 'login' %}">Sign In</a>
+        {% endif %}
+    </li>
+</ul>
+{#------------------------------------#}
+
 
 {% block content %}
-
     {% with subject=object.subject %}
+        <div class="container">
+            <div class="course_detail_wrapper">
+            <p class="detail_title">{{ object.title }}</p>
 
-        <div class="shadow-style text-center text-black-50  bg-light">
+                <div class="main_detail">
+                    <p>Modules Numbers: {{ object.modules.count }}</p>
+                    <p>Instructor: {{ object.owner }}</p>
+                </div>
 
-            <p>
-                <a class="display-6" href="{% url 'course_list_subject' subject.slug %}">Subject: {{ subject.title }}</a>
-                <br>
-                <span class="display-6">
-                    Modules Numbers: {{ object.modules.count }}
-                </span>
-                <br>
-                Instructor: {{ object.owner }}
-            </p>
+                <div class="detail_image">
+                    <img src="{{ object.image_url }}" alt="rasm topilmadi">
+                </div>
 
-            <h5 class="display-6">Overview</h5>
-            <p>
-                {{ object.overview|linebreaks }}
-            </p>
+                {#                <a class="display-6" href="{% url 'course_list_subject' subject.slug %}">Subject: {{ subject.title }}</a>#}
 
-            {% if request.user.is_authenticated %}
-                {% if request.user in object.students.all  %}
-                    {#  user loged in and enrolled in the course #}
-                    <p>
-                        <a class="btn btn-primary" href="{% url 'student_course_detail' object.id %}">
-                            Access Contents
-                        </a>
-                    </p>
+                <p>
+                    {{ object.overview|linebreaks }}
+                </p>
+
+                {% if request.user.is_authenticated %}
+                    {% if request.user in object.students.all %}
+                        {#  user loged in and enrolled in the course #}
+                        <p>
+                            <a class="btn btn-primary" href="{% url 'student_course_detail' object.id %}">
+                                KURSNI DAVOM ETTIRISH
+                            </a>
+                        </p>
+                    {% else %}
+                        {# loged in but not enrolled  #}
+                        <form action="{% url 'student_enroll_course' %}" method="post">
+                            {{ enroll_form }}
+                            {% csrf_token %}
+                            <button class="btn btn-primary w-100" type="submit" value="Enroll Now">KURSNI BOSHLASH
+                            </button>
+                        </form>
+                    {% endif %}
                 {% else %}
-                    {# loged in but not enrolled  #}
-                    <form action="{% url 'student_enroll_course'%}" method="post">
-                        {{ enroll_form }}
-                        {% csrf_token %}
-                        <button class="btn btn-primary w-100" type="submit" value="Enroll Now">Enroll Now</button>
-                    </form>
+                    <a class="btn btn-success" href="{% url 'student_registration' %}">
+                        KURSNI BOSHLASH
+                    </a>
                 {% endif %}
-            {% else %}
-                <a class="btn btn-success" href="{% url 'student_registration' %}">
-                    Register to Enroll
-                </a>
-            {% endif %}
 
+            </div>
         </div>
+
 
     {% endwith %}
 
 {% endblock %}
+</body>
+
+

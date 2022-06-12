@@ -166,7 +166,7 @@ class ContentOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
 # ---------------Course catalog--------------------
 class CourseListView(TemplateResponseMixin, View):
     model = Course
-    template_name = 'courses/course/list.html'
+    template_name = 'courses/course/home.html'
 
     def get(self, request, subject=None):
         # subjects = cache.get('all_subjects')

@@ -1,0 +1,177 @@
+{#{% extends 'base.html' %}#}
+{#{% load static %}#}
+{#{% block title %}#}
+{#    {% if subject %}#}
+{#        {{ subject.title }} Courses#}
+{#    {% else %}#}
+{#        All Courses#}
+{#    {% endif %}#}
+{#{% endblock %}#}
+{##}
+{#{% block page_title %}#}
+{#        {% if subject %}#}
+{#            {{ subject.title }} Courses#}
+{#        {% else %}#}
+{#            All Courses#}
+{#        {% endif %}#}
+{#{% endblock %}#}
+
+{#{% block content %}#}
+{##}
+{#    <div class="contents hover-style">#}
+{#        <h3 class="my_button">Subjects</h3>#}
+{#        <ul id="course-modules">#}
+{#            <li {% if not subject %}class="selected" {% endif %}>#}
+{#                <a href="{% url 'course_list' %}">All</a>#}
+{#            </li>#}
+{##}
+{#            {% for s in subjects %}#}
+{#                <li {% if subject == s %}class="selected" {% endif %}>#}
+{#                    <a href="{% url 'course_list_subject' s.slug %}">#}
+{#                        {{ s.title }}#}
+{#                        <br>#}
+{#                        <span>{{ s.total_courses }}</span>#}
+{#                    </a>#}
+{#                </li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    </div>#}
+{##}
+{#    <div class="module shadow-style" >#}
+{#        {% for course in courses %}#}
+{#            {% with subject=course.subject %}#}
+{#                <div class="hover-style module-content">#}
+{#                    <h3>#}
+{#                    <a href="{% url 'course_detail' course.slug %}">#}
+{#                        {{ course.title }}#}
+{#                    </a>#}
+{#                </h3>#}
+{##}
+{#                <p>#}
+{#                    <a href="{% url 'course_list_subject' subject.slug %}">{{ subject }}</a>#}
+{#                    <br>#}
+{#                    >>> {{ course.total_modules }} Modules#}
+{#                    <br>#}
+{#                    <b>Instructor : </b> {{ course.owner }}#}
+{#                </p>#}
+{#                </div>#}
+{#            {% endwith %}#}
+{#        {% endfor %}#}
+{#    </div>#}
+{##}
+{#{% endblock %}#}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ocean Academy | Home</title>
+    {#    <title>{% block title %}Ocaen Academy | Home{% endblock %}</title>#}
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+
+    {# if you needed to add additional style files #}
+    {% block style %}
+    {% endblock %}
+</head>
+
+<body>
+
+{# navbar #}
+<ul class="nav container  d-flex flex-md-row flex-column  justify-content-between align-items-center">
+    <li class="navbar-brand ">
+        <a class="nav-link" href="/">
+            <div class="my-nav-link">
+                <img src="{% static 'imgs/wave 2.png' %}" alt="site-logo" width="65px" style="padding-left: 20px">
+                <p style="margin-bottom: 0">OCEAN ACADEMY</p>
+            </div>
+        </a>
+    </li>
+
+    <li class="nav-item display-3">
+        {#                                     {% block page_title %}{% endblock %}#}
+    </li>
+
+{#    <li><a class="kurslarimiz-link-in-navbar" href="">Kurslarimiz</a></li>#}
+
+    <li class="nav-item">
+        {% if request.user.is_authenticated %}
+            <a class="nav-link btn btn-danger btn-sm" href="{% url 'logout' %}">Sign Out</a>
+        {% else %}
+            <a class="nav-link btn btn-success btn-sm" href="{% url 'login' %}">Sign In</a>
+        {% endif %}
+    </li>
+</ul>
+{#------------------------------------#}
+
+<div class="container">
+
+    <div class="home-page">
+        <div class="home-page-title">
+            <p>DASTURLASHNI HOXLAGAN JOYDA O'RGANING</p>
+        </div>
+        <div class="home-page-img">
+            <img class="image" src="../../../static/imgs/person.png" alt="#rasm bor edi">
+        </div>
+    </div>
+
+    <h1 class="w-25 m-auto">Barcha kurslar</h1>
+    <h1 class="w-25 m-auto">Barcha kurslar</h1>
+    <h1 class="w-25 m-auto">Barcha kurslar</h1>
+
+    {#        COURSES       #}
+
+
+    <div class="courses">
+        {% for course in courses %}
+            {% with subject=course.subject %}
+
+                <div class="course" id="course">
+
+                    <div class="course-image">
+                        <img src="{{ course.image_url }}" alt="Rasm topilmadi :("> <br>
+                    </div>
+
+                    <div class="p-3 pt-4 course-content">
+                        <h5 class="text-center">{{ course.title }}</h5>
+                        {#                        <a href="{% url 'course_detail' course.slug %}">{{ course.title }}</a>#}
+                        <p class="text-start align-text-bottom">{{ course.owner }}</p>
+                    </div>
+
+                    <div class="course-start" id="course-start">
+                        <p><a href="{% url 'course_detail' course.slug %}">START <img
+                                src="../static/imgs/right-arrow%20(1).png" alt=""> </a></p>
+                        {#                        <a href="https://www.flaticon.com/free-icons/arrows" title="arrows icons"></a>#}
+                    </div>
+{#                    <p><a href="{% url 'course_list_subject' subject.slug %}">{{ subject }}</a></p>#}
+                </div>
+
+            {% endwith %}
+        {% endfor %}
+    </div>
+</div>
+
+
+{# bootstrap js #}
+<script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+{#---------------------#}
+
+{# jquery file TODO:: try to use js instead #}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $(document).ready(function () {
+        {% block domready %}
+        {% endblock %}
+    })
+</script>
+{#------------------#}
+</body>
+
+</html>

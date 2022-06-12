@@ -8,9 +8,9 @@
     <title>Ocean Academy | Home</title>
     {#    <title>{% block title %}Ocaen Academy | Home{% endblock %}</title>#}
 
+    <link rel="stylesheet" href="{% static 'base.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'base.css' %}">
 
     {# if you needed to add additional style files #}
     {% block style %}
@@ -34,7 +34,7 @@
         {#                                     {% block page_title %}{% endblock %}#}
     </li>
 
-    <li><a href="{% url 'course_list' %}">Kurslarimiz</a></li>
+    <li><a class="kurslarimiz-link-in-navbar" href="{% url 'course_list' %}">Kurslarimiz</a></li>
 
     <li class="nav-item">
         {% if request.user.is_authenticated %}
@@ -46,42 +46,54 @@
 </ul>
 {#------------------------------------#}
 
-<div class="container">
-
-    <div class="home-page">
-        <div class="home-page-title">
-            <p>DASTURLASHNI HOXLAGAN JOYDA O'RGANING</p>
-        </div>
-        <div class="home-page-img">
-            <img class="image" src="../static/imgs/person.png" alt="#rasm bor edi">
-        </div>
-    </div>
-
-    <h1 class="w-25 m-auto">Barcha kurslar</h1>
-    <h1 class="w-25 m-auto">Barcha kurslar</h1>
-    <h1 class="w-25 m-auto">Barcha kurslar</h1>
-
-    <div class="courses">
-        {% for course in courses %}
-            {% with subject=course.subject %}
-                <div class="course">
-                    <div class="course-image">
-                        <img src="{{ course.image_url }}" alt="Rasm topilmadi :("> <br>
-                    </div>
-                    <div></div>
-                    <a href="{% url 'course_detail' course.slug %}">{{ course.title }}</a>
+{#<div class="container">#}
+{##}
+{#    <div class="home-page">#}
+{#        <div class="home-page-title">#}
+{#            <p>DASTURLASHNI HOXLAGAN JOYDA O'RGANING</p>#}
+{#        </div>#}
+{#        <div class="home-page-img">#}
+{#            <img class="image" src="../static/imgs/person.png" alt="#rasm bor edi">#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <h1 class="w-25 m-auto">Barcha kurslar</h1>#}
+{#    <h1 class="w-25 m-auto">Barcha kurslar</h1>#}
+{#    <h1 class="w-25 m-auto">Barcha kurslar</h1>#}
+{##}
+    {#        COURSES       #}
+{##}
+{##}
+{#    <div class="courses">#}
+{#        {% for course in courses %}#}
+{#            {% with subject=course.subject %}#}
+{##}
+{#                <div class="course" id="course">#}
+{##}
+{#                    <div class="course-image">#}
+{#                        <img src="{{ course.image_url }}" alt="Rasm topilmadi :("> <br>#}
+{#                    </div>#}
+{##}
+{#                    <div class="p-3 pt-4 course-content">#}
+{#                        <h5 class="text-center">{{ course.title }}</h5>#}
+{#                        <a href="{% url 'course_detail' course.slug %}">{{ course.title }}</a>#}
+{#                        <p class="text-start align-text-bottom">{{ course.owner }}</p>#}
+{#                    </div>#}
+{##}
+{#                    <div class="course-start" id="course-start">#}
+{#                        <p><a href="{% url 'course_detail' course.slug %}">boshlash <img src="../static/imgs/right-arrow%20(1).png" alt=""> </a></p>#}
+{#                        <a href="https://www.flaticon.com/free-icons/arrows" title="arrows icons"></a>#}
+{#                    </div>#}
+{##}
+{##}
                     {#                    <p><a href="{% url 'course_list_subject' subject.slug %}">{{ subject }}</a></p>#}
-                    <p>{{ course.owner }}</p>
-                    <div>
-
-                    </div>
-                </div>
-
-            {% endwith %}
-        {% endfor %}
-    </div>
-
-</div>
+{#                </div>#}
+{##}
+{#            {% endwith %}#}
+{#        {% endfor %}#}
+{#    </div>#}
+{##}
+{#</div>#}
 
 
 {#    <div>#}

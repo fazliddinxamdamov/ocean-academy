@@ -56,6 +56,12 @@ body {
     /*margin: 0;*/
     /*padding: 0;*/
 }
+.kurslarimiz-link-in-navbar{
+    color: black;
+}
+.kurslarimiz-link-in-navbar:hover{
+
+}
 
 .my-nav-link {
     display: flex;
@@ -159,7 +165,7 @@ a.secondary-button {
 
 .courses {
     /*border: 1px solid red;*/
-    padding: 10px 20px;
+    padding: 10px 60px;
     width: 100%;
     /*height: 500px;*/
     margin-top: 50px;
@@ -172,11 +178,14 @@ a.secondary-button {
     border: 2px solid black;
     border-radius: 5px;
     box-shadow: 3px 3px black;
-    /*padding: 5px 5px;*/
     margin: 0 10px 30px 10px;
     width: 250px;
     height: 350px;
     overflow: auto;
+    position: relative;
+}
+.course a:hover{
+    color: white;
 }
 
 .course-image {
@@ -187,11 +196,55 @@ a.secondary-button {
 
 }
 
+.course-content{
+    width: 100%;
+    height: 125px;
+    padding: 10px 10px 0 10px;
+    /*border: 1px solid red;*/
+    position: relative;
+}
+.course-content p{
+    position: absolute;
+    font-size: 14px;
+    font-style: italic;
+    margin-bottom: 0;
+    bottom: 5px;
+    left: 10px;
+}
+
 .course-image img {
     width: 100%;
     object-fit: cover;
     height: 100%;
 }
+.course-start{
+    background-color: #385a8d;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding: 5px;
+}
+
+.course-start p, a{
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+.course-start img{
+    width: 20px;
+    height: 20px;
+}
+
+.course-start:hover{
+    background-color: #254573;
+}
+
 
 .helptext {
     display: none;
