@@ -68,17 +68,3 @@ class StudentCourseDetailView(DetailView):
                 context['module'] = course.modules.all()[0]
 
         return context
-
-
-
-
-
-
-
-
-
-
-
-
-
-

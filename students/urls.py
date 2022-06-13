@@ -10,9 +10,10 @@ urlpatterns = [
     # ...list of all the courses the user is enrolled in
     path('courses/', views.StudentCourseListView.as_view(), name='student_course_list'),
     # ...course detail page + course chat room
-    path('coursjes/<pk>/', views.StudentCourseDetailView.as_view(), name='student_course_detail'),
+    path('courses/<pk>/', views.StudentCourseDetailView.as_view(), name='student_course_detail'),
     # ...showing the contents of a course module
     path('courses/<pk>/<module_id>', views.StudentCourseDetailView.as_view(), name='student_course_detail_module'),
+
     # ...using caching to cache a view
     # path('courses/<pk>/', cache_page(60 * 15)(views.StudentCourseDetailView.as_view()), name='student_course_detail'),
     # path('courses/<pk>/<module_id>', cache_page(60 * 15)(views.StudentCourseDetailView.as_view()),

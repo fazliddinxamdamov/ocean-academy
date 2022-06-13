@@ -4,6 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from .fields import OrderField
 from django.template.loader import render_to_string
+
 """
 we have a Subject the contain courses and every course contain modules
     - subject has:
@@ -81,6 +82,29 @@ class Module(models.Model):
 
     def __str__(self):
         return f'{self.order}, {self.title}'
+
+
+class Lesson(models.Model):
+    title = models.CharField(max_length=500)
+    module = models.ForeignKey(Module, related_name='lessons', on_delete=models.CASCADE)
+    video = models.CharField(max_length=10000)
+    pdf = models.CharField(max_length=10000)
+    order = OrderField(blank=True, for_fields=['module'])
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f'{self.order}, {self.title}'
+
+
+class Task(models.Model):
+    description = models.CharField(max_length=10000)
+    lesson = models.ForeignKey(Lesson, related_name='tasks', on_delete=models.CASCADE)
+    order = OrderField(blank=True, for_fields=['lesson'])
+
+    class Meta:
+        ordering = ['order']
 
 
 class Content(models.Model):

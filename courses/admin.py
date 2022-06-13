@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Subject, Course, Module
+from .models import Subject, Course, Module, Lesson
 
+admin.site.index_template = 'memcache_status/admin_index.html'
 
-admin.site.index_template = 'memcache_status/admin_index.html';
 
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
@@ -10,8 +10,8 @@ class SubjectAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('title',)}
 
 
-class ModuleInline(admin.StackedInline):
-    model = Module
+class LessonInline(admin.StackedInline):
+    model = Lesson
 
 
 @admin.register(Course)
@@ -20,4 +20,16 @@ class CourseAdmin(admin.ModelAdmin):
     list_filter = ['created', 'subject']
     search_fields = ['title', 'overview']
     prepopulated_fields = {'slug': ('title',)}
-    inlines = [ModuleInline]
+
+
+@admin.register(Module)
+class ModuleAdmin(admin.ModelAdmin):
+    list_display = ['title', 'course']
+    # list_filter = ['created', 'subject']
+    search_fields = ['title', 'description']
+    # prepopulated_fields = {'slug': ('title',)}
+    inlines = [LessonInline]
+
+# @admin.register(Lesson)
+# class LessonAdmin(admin.ModelAdmin):
+#     list_display = ['title', 'module', 'created']
