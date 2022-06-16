@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@800&family=Oswald:wght@700&display=swap');
 
-
+.container{
+    padding: 0;
+}
 .nav {
     padding: 5px 20px;
 }
@@ -9,10 +11,12 @@
     /*margin: 0;*/
     /*padding: 0;*/
 }
-.kurslarimiz-link-in-navbar{
+
+.kurslarimiz-link-in-navbar {
     color: black;
 }
-.kurslarimiz-link-in-navbar:hover{
+
+.kurslarimiz-link-in-navbar:hover {
 
 }
 
@@ -28,22 +32,25 @@
     color: #0056d5;
 }
 
-.course_detail_wrapper{
+.course_detail_wrapper {
     width: 100%;
     /*height: 500px;*/
     /*border: 1px solid red;*/
     /*padding: 30px 50px 30px 50px;*/
 }
-.detail_image{
+
+.detail_image {
     width: 80%;
     /*border: 1px solid blue;*/
     margin: 0 auto;
 }
-.detail_image img{
+
+.detail_image img {
     width: 100%;
     height: 100%;
 }
-.detail_title{
+
+.detail_title {
     text-align: center;
     align-items: center;
     font-weight: bold;
@@ -52,37 +59,61 @@
 }
 
 .collapsible {
-  background-color: #777;
-  color: white;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
 }
 
 .active, .collapsible:hover {
-  background-color: #555;
+    background-color: #555;
 }
 
 .collapsible:after {
-  content: '\002B';
-  color: white;
-  font-weight: bold;
-  float: right;
-  margin-left: 5px;
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
 }
 
 .active:after {
-  content: "\2212";
+    content: "\2212";
 }
 
 .content {
-  padding: 0 18px;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
-  background-color: #f1f1f1;
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+}
+
+.lessons{
+    /*border: 1px solid red;*/
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    /*height: 600px;*/
+}
+
+.lesson-part{
+    width: 400px;
+    /*border: 1px solid red;*/
+}
+
+.lessons-info{
+    width: 100%;
+    height: 80px;
+    background-color: #20c997;
+}
+
+.frame-part{
+    /*border: 1px solid blue;*/
 }

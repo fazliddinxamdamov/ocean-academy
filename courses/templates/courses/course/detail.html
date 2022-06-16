@@ -47,8 +47,8 @@
 </ul>
 {#------------------------------------#}
 
-
-{% block content %}
+<div class="container">
+    {% block content %}
     {% with subject=object.subject %}
         <div class="container">
             <div class="course_detail_wrapper">
@@ -71,22 +71,6 @@
 
                 <h3 class="display-6">Modules</h3>
 
-
-                {#                {% for m in object.modules.all %}#}
-                {#                    <li data-id="{{ m.id }}" {% if m == module %}class="selected"{% endif %}>#}
-                {#                        <a href="{% url 'student_course_detail_module' object.id m.id %}">#}
-
-                {#                            Module <span class="order">{{ m.order|add:1 }}</span>#}
-
-
-                {#                    {{ m.title }}#}
-                {#                    </a>#}
-                {#                    </li>#}
-
-                {#                {% empty %}#}
-                {#                    <li>No Modules Yet.</li>#}
-                {#                {% endfor %}#}
-
                 {% for m in object.modules.all %}
                     {#                    <p data-id="{{ m.id }}" {% if m == module %}class="selected"{% endif %}>#}
 
@@ -104,24 +88,6 @@
                     <li>No Modules Yet.</li>
                 {% endfor %}
 
-                {#                <button class="collapsible">Open Section 1</button>#}
-                {#                <div class="content">#}
-                {#                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut#}
-                {#                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco#}
-                {#                        laboris nisi ut aliquip ex ea commodo consequat.</p>#}
-                {#                </div>#}
-                {#                <button class="collapsible">Open Section 2</button>#}
-                {#                <div class="content">#}
-                {#                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut#}
-                {#                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco#}
-                {#                        laboris nisi ut aliquip ex ea commodo consequat.</p>#}
-                {#                </div>#}
-                {#                <button class="collapsible">Open Section 3</button>#}
-                {#                <div class="content">#}
-                {#                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut#}
-                {#                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco#}
-                {#                        laboris nisi ut aliquip ex ea commodo consequat.</p>#}
-                {#                </div>#}
                 <br>
 
 
@@ -156,22 +122,7 @@
 
 {% endblock %}
 </body>
+<script src="{% static 'base.js' %}"></script>
 
-<script>
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
-
-    for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
-            } else {
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
-        });
-    }
-</script>
 
 

@@ -42,7 +42,7 @@
         {#                                     {% block page_title %}{% endblock %}#}
     </li>
 
-        <li><a class="kurslarimiz-link-in-navbar" href="">Kurslarimiz</a></li>
+    <li><a class="kurslarimiz-link-in-navbar" href="">Kurslarimiz</a></li>
 
     <li class="nav-item">
         {% if request.user.is_authenticated %}
@@ -54,57 +54,55 @@
 </ul>
 {#------------------------------------#}
 
-{% block content %}
-    {# the side-bar #}
-    <div class="contents">
-        <h3 class="display-6">Modules</h3>
-        <ul>
-            {% for m in object.modules.all %}
-                <li data-id="{{ m.id }}" {% if m == module %}class="selected"{% endif %}>
-                    <a href="{% url 'student_course_detail_module' object.id m.id %}">
-                        <span>
-                            Module <span class="order">{{ m.order|add:1 }}</span>
-                        </span>
-                        <br>
-                        {{ m.title }}
-                    </a>
-                </li>
 
-            {% empty %}
-                <li>No Modules Yet.</li>
-            {% endfor %}
-        </ul>
+<div class="container">
+    {% block content %}
+        <div class="lessons">
+            <div class="lessons-info">
 
-{#        <div>#}
-{#            <h3 class="display-6 hover-style">#}
-{#                <a href="{% url 'chat:course_chat_room' object.id %}">#}
-{#                    Chat Room ==>#}
-{#                </a>#}
-{#            </h3>#}
-{#        </div>#}
+            </div>
 
-    </div>
 
-    <div class="module">
-        {#    {% cache 300 module_content_s module%}#}
-        {% for content in module.contents.all %}
-            {% with item=content.item %}
-                <div class="module card">
-                    <details>
-                        <summary>
-                            <span class="display-6 p-1">{{ item.title }}</span>
-                        </summary>
+            <div class="lesson-part">
+                {% for m in object.modules.all %}
+                    <button class="collapsible">{{ m.title }}</button>
+                    <div class="content">
+                        {% for n in m.lessons.all %}
+                            <a href=""><p>{{ n.title }}</p></a>
+                        {% endfor %}
+                    </div>
 
-                        {{ item.render }}
 
-                    </details>
-                </div>
+                {% empty %}
+                    <li>Modullar mavjuda emas.</li>
+                {% endfor %}
+            </div>
 
-            {% endwith %}
-        {% endfor %}
-        {#    {% endcache %}#}
-    </div>
-{% endblock %}
+            <div class="frame-part">
+                <iframe width="850" height="480" src="https://www.youtube.com/embed/xcGtfYUfDLo"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+
+
+
+
+            {#        <div>#}
+            {#            <h3 class="display-6 hover-style">#}
+            {#                <a href="{% url 'chat:course_chat_room' object.id %}">#}
+            {#                    Chat Room ==>#}
+            {#                </a>#}
+            {#            </h3>#}
+            {#        </div>#}
+
+        </div>
+
+    {% endblock %}
+</div>
+
 </body>
+<script src="{% static 'base.js' %}"></script>
 
 
